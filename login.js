@@ -6,10 +6,10 @@ form.addEventListener('submit', function(event) {
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
   
-  const storedUsername = localStorage.getItem('username');
-  const storedPassword = localStorage.getItem('password');
+  const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+  const user = existingUsers.find(user => user.username === username && user.password === password);
   
-  if (username === storedUsername && password === storedPassword) {
+  if (user) {
     // send login data to server
     console.log('Username:', username);
     console.log('Password:', password);
